@@ -18,4 +18,12 @@ class AuthRepository {
       "userId": _authLocalDataSource.getUserId()
     };
   }
+
+  void setLocalAuthDetails({String jwtToken, String userId}) {
+    _authLocalDataSource.changeAuthStatus();
+    _authLocalDataSource.setJwt(jwtToken);
+    _authLocalDataSource.setUserId(userId);
+  }
+
+  //and signInUser
 }

@@ -26,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void _checkAuthStatus() {
     final authDetails = _authRepository.getLocalAuthDetails();
-    print(authDetails);
+
     if (authDetails['isLogin']) {
       emit(Authenticated(
           jwtToken: authDetails['jwtToken'], userId: authDetails['userId']));

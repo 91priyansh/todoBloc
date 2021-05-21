@@ -13,4 +13,18 @@ class AuthLocalDataSource {
   String getUserId() {
     return Hive.box(authBox).get(userIdKey, defaultValue: "");
   }
+
+  Future<void> setJwt(String jwtToken) async {
+    Hive.box(authBox).put(jwtTokenKey, jwtToken);
+  }
+
+  Future<void> setUserId(String userId) async {
+    Hive.box(authBox).put(userId, userId);
+  }
+
+  Future<void> changeAuthStatus() async {
+    final currentAuthStatus =
+        Hive.box(authBox).get(isLoginKey, defaultValue: false);
+    Hive.box(authBox).put(isLoginKey, !currentAuthStatus);
+  }
 }
