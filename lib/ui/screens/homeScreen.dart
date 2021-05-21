@@ -1,7 +1,7 @@
 import 'package:bloc_example/features/todo/cubit/todoCubit.dart';
 import 'package:bloc_example/features/todo/model/todo.dart';
 import 'package:bloc_example/ui/styles/colors.dart';
-import 'package:bloc_example/utils/routes.dart';
+import 'package:bloc_example/app/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,9 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          print("object");
-          print(Theme.of(context).primaryColor.toString());
-          //Navigator.of(context).pushNamed(Routes.addTodo);
+          Navigator.of(context).pushNamed(Routes.addTodo);
         },
       ),
     );
