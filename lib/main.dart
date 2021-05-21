@@ -2,6 +2,8 @@ import 'package:bloc_example/features/auth/authRepository.dart';
 import 'package:bloc_example/features/auth/cubit/authCubit.dart';
 import 'package:bloc_example/features/todo/cubit/todoCubit.dart';
 import 'package:bloc_example/features/todo/todoRepository.dart';
+import 'package:bloc_example/ui/styles/theme/appTheme.dart';
+import 'package:bloc_example/ui/styles/theme/themeCubit.dart';
 import 'package:bloc_example/utils/constants.dart';
 import 'package:bloc_example/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -28,12 +30,20 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<TodoCubit>(create: (_) => TodoCubit(TodoRepository())),
-        BlocProvider<AuthCubit>(create: (_) => AuthCubit(AuthRepository()))
+        BlocProvider<AuthCubit>(create: (_) => AuthCubit(AuthRepository())),
+        BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.home,
-        onGenerateRoute: Routes.onGenerateRouted,
+      child: Builder(
+        builder: (context) {
+          final currentTheme = context.watch<ThemeCubit>().state.appTheme;
+
+          return MaterialApp(
+            theme: appThemeData[currentTheme],
+            debugShowCheckedModeBanner: false,
+            initialRoute: Routes.home,
+            onGenerateRoute: Routes.onGenerateRouted,
+          );
+        },
       ),
     );
   }

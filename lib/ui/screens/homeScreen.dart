@@ -46,6 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Todo App Bloc"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.settings);
+              },
+              icon: Icon(Icons.settings))
+        ],
       ),
       body: BlocBuilder<TodoCubit, TodoState>(
           bloc: context.read<TodoCubit>(),
@@ -56,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             } else if (state is TodoFetchFailure) {
               return Center(
-                child: Text(state.errorMessage),
+                child: Text(
+                  state.errorMessage,
+                ),
               );
             }
             return _buildTodoList((state as TodoFetchSuccess).todos);
@@ -64,7 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          Navigator.of(context).pushNamed(Routes.addTodo);
+          print("object");
+          print(Theme.of(context).primaryColor.toString());
+          //Navigator.of(context).pushNamed(Routes.addTodo);
         },
       ),
     );
