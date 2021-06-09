@@ -9,8 +9,7 @@ class AddTodoScreen extends StatelessWidget {
   AddTodoScreen({Key key}) : super(key: key);
 
   void showSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   final TextEditingController _textEditingController = TextEditingController();
@@ -36,13 +35,9 @@ class AddTodoScreen extends StatelessWidget {
                     onPressed: state is TodoAddInProgress
                         ? () {}
                         : () {
-                            context
-                                .read<TodoAddCubit>()
-                                .addTodo(_textEditingController.text.trim());
+                            context.read<TodoAddCubit>().addTodo(_textEditingController.text.trim());
                           },
-                    child: state is TodoAddInProgress
-                        ? CircularProgressIndicator(color: Colors.white)
-                        : Icon(Icons.add),
+                    child: state is TodoAddInProgress ? CircularProgressIndicator() : Icon(Icons.add),
                   );
                 },
                 listener: (context, state) {
@@ -50,9 +45,7 @@ class AddTodoScreen extends StatelessWidget {
                     //show todo added message
                     showSnackBar(context, "Todo added successfully");
                     //update todoList of TodoCubit
-                    context
-                        .read<TodoCubit>()
-                        .updateTodoList(state.todo, "todoAdded");
+                    context.read<TodoCubit>().updateTodoList(state.todo, "todoAdded");
                   } else if (state is TodoAddFailure) {
                     showSnackBar(context, state.errorMessage);
                   }
