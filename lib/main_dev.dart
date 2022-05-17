@@ -2,6 +2,8 @@ import 'package:bloc_example/app/app.dart';
 import 'package:bloc_example/app/appConfig.dart';
 import 'package:flutter/material.dart';
 
+//Bloc examples
+
 void main() async {
   AppConfig appConfig =
       AppConfig(apiUrl: "", appName: "Bloc Example Dev", flavor: "dev");
